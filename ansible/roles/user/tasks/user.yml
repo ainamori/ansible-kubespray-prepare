@@ -1,0 +1,32 @@
+#
+- name: useradd
+  user: 
+    name: admin
+    password: "$6$saltsalt$qFmFH.bQmmtXzyBY0s9v7Oicd2z4XSIecDzlB5KiA2/jctKu9YterLp8wwnSq.qc.eoxqOmSuNp2xS0ktL3nh/"
+  tags:
+    - prod
+  become: yes
+
+- name: ssh add_key
+  copy: 
+    src: files/ssh_keys/
+    dest: /home/admin/.ssh
+    owner: admin
+    group: admin
+  tags:
+    - prod
+  become: yes
+
+- name: change owner
+  file: 
+    path: "/home/admin/.ssh/{{ item['name'] }}"
+    owner: admin
+    group: admin
+    mode: "{{ item['mode'] }}" 
+  with_items:
+    - { name: 'id_dsa' , mode: '0600' }
+    - { name: 'authorized_keys' , mode: '0600' }
+  tags:
+    - prod
+  become: yes
+

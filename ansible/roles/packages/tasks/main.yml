@@ -1,0 +1,28 @@
+#
+- name: install epel-release
+  yum: 
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - epel-release
+  tags:
+    - prod
+  become: yes
+
+- name: Install CentOS 6 packages
+  import_tasks: packages_c6.yml
+  when: >
+        ansible_distribution == 'CentOS'
+        and ansible_distribution_major_version == '6'
+  tags:
+    - prod
+  become: yes
+
+- name: Install CentOS 7 packages
+  import_tasks: packages_c7.yml
+  when: >
+        ansible_distribution == 'CentOS'
+        and ansible_distribution_major_version == '7'
+  tags:
+    - prod
+  become: yes

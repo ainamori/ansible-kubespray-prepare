@@ -1,0 +1,19 @@
+#
+- name: Setup iptables
+  import_tasks: iptables.yml
+  when: >
+        ansible_distribution == 'CentOS'
+        and ansible_distribution_major_version == '6'
+  tags:
+    - prod
+  become: yes
+
+- name: Setup firewalld
+  import_tasks: firewalld.yml
+  when: >
+        ansible_distribution == 'CentOS'
+        and ansible_distribution_major_version == '7'
+  tags:
+    - prod
+  become: yes
+

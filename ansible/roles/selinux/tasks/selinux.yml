@@ -1,0 +1,7 @@
+---
+- name: disable selinux
+  selinux:
+    state: disabled
+  tags:
+    - prod
+  become: yes

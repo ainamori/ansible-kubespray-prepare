@@ -1,0 +1,31 @@
+#
+- name: install basic packages with yum
+  yum: 
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - git
+    - ansible
+    - sysstat
+    - tree
+    - net-tools
+    - sudo
+    - make
+    - nmap
+    - wget
+    - openssh-clients
+    - telnet
+    - tcpdump
+    - perl
+    - ruby
+    - python
+    - python-pip
+    - python-devel
+    - python-netaddr
+    - python34
+    - krb5-devel
+    - krb5-workstation
+    - libselinux-python
+  tags:
+    - prod
+  become: yes

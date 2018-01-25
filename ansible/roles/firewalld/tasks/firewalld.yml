@@ -1,0 +1,33 @@
+---
+- name: install firewalld
+  yum: 
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - firewalld
+  tags:
+    - prod
+  become: yes
+
+- name: copy firewalld settings
+  template:
+    src: "templates/etc/firewalld/{{ item }}"
+    dest: "/etc/firewalld/{{ item }}"
+  with_items:
+    - firewalld.conf
+    - zones/kubernetes_default.xml
+  tags:
+    - prod
+  become: yes
+
+- name: Restart firewalld
+  service:
+    name: firewalld
+    #state: restarted
+    #enabled: yes
+    state: stopped
+    enabled: no
+  tags:
+    - prod
+  become: yes
+

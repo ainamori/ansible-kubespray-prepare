@@ -1,0 +1,17 @@
+---
+- name: swap - disable swap
+  command: swapoff --all
+  ignore_errors: yes
+  tags:
+    - prod
+  become: yes
+
+- name: swap - remove current swaps from fstab
+  lineinfile:
+    dest: /etc/fstab
+    #regexp: '^/[\S]+\s+none\s+swap '
+    regexp: '^\/dev\/mapper\/centos-swap'
+    state: absent
+  tags:
+    - prod
+  become: yes

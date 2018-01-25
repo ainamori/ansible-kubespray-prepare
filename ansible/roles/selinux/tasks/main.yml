@@ -1,0 +1,7 @@
+#
+- name: Disable selinux
+  import_tasks: selinux.yml
+  tags:
+    - prod
+  become: yes
+

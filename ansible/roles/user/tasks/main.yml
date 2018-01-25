@@ -1,0 +1,7 @@
+#
+- name: Create admin user (admin/Mu***)
+  import_tasks: user.yml
+  tags:
+    - prod
+  become: yes
+

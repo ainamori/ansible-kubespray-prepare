@@ -1,0 +1,9 @@
+- hosts: target_host
+  tasks:
+  roles:
+    - packages
+    - selinux
+    - user
+    - firewalld
+    - swapoff
+#  serial: 1

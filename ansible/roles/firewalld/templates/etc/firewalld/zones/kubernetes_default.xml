@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone>
+  <short>kubernetes_default</short>
+  <description>For use in Kubernetes public areas.</description>
+  <service name="http"/>
+  <service name="https"/>
+  <service name="ssh"/>
+  <service name="snmp"/>
+  <service name="dhcpv6-client"/>
+  <service>
+    <short>Kubernetes API server</short>
+    <description>Kubernetes API server</description>
+    <port protocol="tcp" port="6443"/>
+  </service>
+  <service>
+    <short>etcd server client API</short>
+    <description>etcd server client API</description>
+    <port protocol="tcp" port="2379-2380"/>
+  </service>
+  <service>
+    <short>Kubelet API</short>
+    <description>Kubelet API</description>
+    <port protocol="tcp" port="10250"/>
+  </service>
+  <service>
+    <short>kube-scheduler</short>
+    <description>kube-scheduler</description>
+    <port protocol="tcp" port="10251"/>
+  </service>
+  <service>
+    <short>kube-controller-manager</short>
+    <description>kube-controller-manager</description>
+    <port protocol="tcp" port="10252"/>
+  </service>
+  <service>
+    <short>Read-only Kubelet API</short>
+    <description>Read-only Kubelet API</description>
+    <port protocol="tcp" port="10255"/>
+  </service>
+  <service>
+    <short>NodePort Services</short>
+    <description>NodePort Services</description>
+    <port protocol="tcp" port="30000-32767"/>
+  </service>
+  <rule family="ipv4">
+    <port protocol="tcp" port="133"/>
+    <reject type="tcp-reset"/>
+  </rule>
+  <rule family="ipv6">
+    <port protocol="tcp" port="133"/>
+    <reject type="tcp-reset"/>
+  </rule>
+</zone>

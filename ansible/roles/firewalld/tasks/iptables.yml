@@ -1,0 +1,32 @@
+---
+- name: install iptables
+  yum: 
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - iptables
+  tags:
+    - prod
+  become: yes
+
+- name: copy iptables
+  template:
+    src: "templates/etc/{{ item }}"
+    dest: "/etc/{{ item }}"
+  with_items:
+    - sysconfig/iptables
+  tags:
+    - prod
+  become: yes
+
+- name: Restart iptables
+  service:
+    name: iptables
+    #state: restarted
+    #enabled: yes
+    state: stopped
+    enabled: no
+  tags:
+    - prod
+  become: yes
+

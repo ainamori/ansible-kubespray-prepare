@@ -1,0 +1,13 @@
+#
+- name: Install from yum
+  import_tasks: yum_c6.yml
+  tags:
+    - prod
+  become: yes
+
+- name: Install from pip
+  import_tasks: pip_c6.yml
+  tags:
+    - prod
+  become: yes
+

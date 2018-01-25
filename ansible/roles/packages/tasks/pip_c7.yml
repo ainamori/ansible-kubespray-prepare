@@ -1,0 +1,10 @@
+- name: upgrade pip and jinja2
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - pip
+    - jinja2
+  tags:
+    - prod
+  become: yes
